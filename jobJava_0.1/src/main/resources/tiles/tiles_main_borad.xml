@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout"
+		template="/WEB-INF/views/common/main/layout.jsp">
+		<put-attribute name="title" value="레이아웃 페이지" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/main/footer.jsp" />
+	</definition>
+	
+	<definition name="/board/qnATable" extends="baseLayout">
+		<put-attribute name="title" value="JOBJAVA" />
+		<put-attribute name="header" value="/WEB-INF/views/common/main/jobSotCenterHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/main/qnATable.jsp" />
+	</definition>
+	
+	<definition name="/board/qnAAddTableView" extends="baseLayout">
+		<put-attribute name="title" value="JOBJAVA" />
+		<put-attribute name="header" value="/WEB-INF/views/common/main/jobSotCenterHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/board/qnAAddTableView.jsp" />
+	</definition>
+	
+	<definition name="/board/qnATableView" extends="baseLayout">
+		<put-attribute name="title" value="JOBJAVA" />
+		<put-attribute name="header" value="/WEB-INF/views/common/main/jobSotCenterHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/board/qnATableView.jsp" />
+	</definition>
+	
+	<definition name="/board/onlineConTable" extends="baseLayout">
+		<put-attribute name="title" value="JOBJAVA" />
+		<put-attribute name="header" value="/WEB-INF/views/common/main/jobSotCenterHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/main/onlineConTable.jsp" />
+	</definition>
+	
+	<definition name="/board/onlineAddTableView" extends="baseLayout">
+		<put-attribute name="title" value="JOBJAVA" />
+		<put-attribute name="header" value="/WEB-INF/views/common/main/jobSotCenterHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/board/onlineAddTableView.jsp" />
+	</definition>
+	
+	<definition name="/board/onlineTableView" extends="baseLayout">
+		<put-attribute name="title" value="JOBJAVA" />
+		<put-attribute name="header" value="/WEB-INF/views/common/main/jobSotCenterHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/board/onlineTableView.jsp" />
+	</definition>
+	
+	<definition name="/board/employmentConTable" extends="baseLayout">
+		<put-attribute name="title" value="JOBJAVA" />
+		<put-attribute name="header" value="/WEB-INF/views/common/main/jobSotCenterHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/main/employmentConTable.jsp" />
+	</definition>
+	
+	
+	<definition name="/board/employmentTableView" extends="baseLayout">
+		<put-attribute name="title" value="JOBJAVA" />
+		<put-attribute name="header" value="/WEB-INF/views/common/main/jobSotCenterHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/board/employmentTableView.jsp" />
+	</definition>
+	
+	<definition name="/board/employmentAddTableView" extends="baseLayout">
+		<put-attribute name="title" value="JOBJAVA" />
+		<put-attribute name="header" value="/WEB-INF/views/common/main/jobSotCenterHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/board/employmentAddTableView.jsp" />
+	</definition>
+	
+</tiles-definitions>

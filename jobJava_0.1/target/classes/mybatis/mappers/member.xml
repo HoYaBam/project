@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.1//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.jobjava.JJ.member.dao.memberDAO">	
+	<select id="loginselectUser" resultType="MemberVO">
+		SELECT * FROM MEMBER WHERE ID=#{param1}
+	</select>
+	
+	<select id="getAuthList" resultType="String">
+		SELECT AUTHORITY FROM MEMBER WHERE ID=#{param1}
+	</select>
+	
+	<insert id="giveAuth">
+		INSERT INTO USERAUTH VALUES(#{param1},#{param2})
+	</insert>
+	
+	<select id="selectUser" resultType="MemberVO" parameterType="MemberVO">
+		SELECT * FROM MEMBER WHERE ID=#{ID}
+	</select>
+	
+	<insert id="userSignUp" parameterType="MemberVO">
+	<![CDATA[
+		INSERT INTO MEMBER VALUES(#{ID},#{PWD},#{HP},#{ADDR},#{EMAIL},#{AUTHORITY},1)
+	]]>
+	</insert>
+	
+	<insert id="NuserSignUp" parameterType="MemberVO">
+	<![CDATA[
+		INSERT INTO N_MEMBER(NM_NO, ID) VALUES(NMEMBERNO.nextval, #{ID})
+	]]>
+	</insert>
+	
+	<insert id="SuserSignUp" parameterType="MemberVO">
+	<![CDATA[
+		INSERT INTO ST_MEMBER(ST_NO, ID) VALUES(SMEMBERNO.nextval, #{ID})
+	]]>
+	</insert>
+	
+	<insert id="CuserSignUp" parameterType="MemberVO">
+	<![CDATA[
+	INSERT INTO C_MEMBER(B_NO,ID,AGENT,B_TYPE) values(b_no.nextval, #{ID}, '대표자','업종')
+	]]>
+	</insert>
+	
+	<insert id="EuserSignUp" parameterType="MemberVO">
+	<![CDATA[
+		INSERT INTO EMP(EMP_NO, ID) VALUES(EMP_NO.nextval, #{ID})
+	]]>
+	</insert>
+	
+	<insert id="MuserSignUp" parameterType="MemberVO">
+	<![CDATA[
+		INSERT INTO UM_MEMBER(MG_NO, ID,U_NAME) VALUES(MG_NO.nextval, #{ID},'대학교이름')
+	]]>
+	</insert>
+
+	<select id="selectUserInfo" resultType="MemberVO">
+	<![CDATA[
+		SELECT * FROM MEMBER WHERE ID=#{param1}
+	]]>
+	</select>
+	
+	<select id="selectNUserInfo" resultType="NMemberVO">
+	<![CDATA[
+		SELECT MEMBER.ID ,PWD, HP, ADDR, EMAIL, AUTHORITY, ENABLED, NM_NO, NAME,
+		J_SEARCH, BIRTH, LAST_EDU FROM MEMBER, N_MEMBER
+		WHERE N_MEMBER.ID=#{param1} AND MEMBER.ID = #{param1}
+	]]>
+	</select>
+	
+	<select id="selectSUserInfo" resultType="SMemberVO">
+	<![CDATA[
+		SELECT MEMBER.ID , PWD, HP, ADDR, EMAIL, AUTHORITY, ENABLED,
+		ST_NO, MG_NO, NAME, DEPT, MAC_ADDR, BIRTH, U_NAME FROM MEMBER, ST_MEMBER
+		WHERE MEMBER.ID=#{param1} AND ST_MEMBER.ID=#{param1}
+	]]>
+	</select>
+	
+	<select id="selectCOMInfo" resultType="CMemberVO">
+	<![CDATA[
+		SELECT MEMBER.ID , PWD, HP, ADDR, EMAIL, AUTHORITY, ENABLED,
+		B_NO, AGENT, B_TYPE, C_DIV, EMP_NUM, HOMEPAGE, C_NAME FROM MEMBER, C_MEMBER
+		WHERE MEMBER.ID=#{param1} AND C_MEMBER.ID=#{param1}
+	]]>
+	</select>
+	
+	<select id="selectEMPInfo" resultType="EMemberVO">
+	<![CDATA[
+		SELECT MEMBER.ID , PWD, HP, ADDR, EMAIL, AUTHORITY, ENABLED,
+		EMP_NO, NAME,RANK FROM MEMBER, EMP
+		WHERE MEMBER.ID=#{param1} AND EMP.ID=#{param1}
+	]]>
+	</select>
+	
+	<select id="selectMAGInfo" resultType="MMemberVO">
+	<![CDATA[
+		SELECT MEMBER.ID , PWD, HP, ADDR, EMAIL, AUTHORITY, ENABLED,
+		U_NAME, NAME FROM MEMBER, UM_MEMBER
+		WHERE MEMBER.ID=#{param1} AND UM_MEMBER.ID=#{param1}
+	]]>
+	</select>
+	
+
+	
+	<update id="upDateU" parameterType="java.util.HashMap">
+		UPDATE MEMBER
+		<set>
+		<if test="PWD !='' and PWD != null">
+		PWD=#{PWD},
+	     </if>
+	     <if test="HP !='' and HP != null">
+		HP=#{HP},
+	     </if>
+	     <if test="ADDR !='' and ADDR != null">
+		ADDR=#{ADDR},
+	     </if>
+	      <if test="EMAIL !='' and EMAIL != null">
+		EMAIL=#{EMAIL}
+	     </if>
+	     </set>	 
+		WHERE ID=#{ID}
+	</update>
+	<update id="upDateNU" parameterType="java.util.HashMap">
+		UPDATE N_MEMBER 
+		<set>
+		 <if test="NAME !='' and NAME != null">
+		NAME=#{NAME},
+	     </if>
+	      <if test="J_SEARCH !='' and J_SEARCH != null">
+		J_SEARCH=#{J_SEARCH},
+	     </if>
+	      <if test="BIRTH !='' and BIRTH != null">
+		BIRTH=#{BIRTH},
+	     </if>
+	      <if test="LAST_EDU !='' and LAST_EDU != null">
+		LAST_EDU=#{LAST_EDU},
+	     </if>
+		</set> 
+		WHERE ID=#{ID}
+	</update>
+		<update id="upDateSU" parameterType="java.util.HashMap">
+		UPDATE ST_MEMBER 
+		<set>
+		 <if test="NAME !='' and NAME != null">
+		NAME=#{NAME},
+	     </if>
+	      <if test="DEPT !='' and DEPT != null">
+		DEPT=#{DEPT},
+	     </if>
+	      <if test="MAC_ADDR !='' and MAC_ADDR != null">
+		MAC_ADDR=#{MAC_ADDR},
+	     </if>
+	      <if test="BIRTH !='' and BIRTH != null">
+		BIRTH=#{BIRTH},
+	     </if>
+	     <if test="U_NAME !='' and U_NAME != null">
+		U_NAME=#{U_NAME},
+	     </if>
+		</set> 
+		WHERE ID=#{ID}
+	</update>
+	
+	<update id="upDateEMP" parameterType="java.util.HashMap">
+		UPDATE EMP
+		<set>
+		 <if test="NAME !='' and NAME != null">
+		NAME=#{NAME},
+	     </if>
+	      <if test="RANK !='' and RANK != null">
+		RANK=#{RANK},
+	     </if>
+	    </set>
+		WHERE ID=#{ID}
+	</update>
+	<update id="upDateCOM" parameterType="java.util.HashMap">
+		UPDATE C_MEMBER
+		<set>
+		 <if test="AGENT !='' and AGENT != null">
+		AGENT=#{AGENT},
+	     </if>
+	      <if test="B_TYPE !='' and B_TYPE != null">
+		B_TYPE=#{B_TYPE},
+	     </if>
+	      <if test="C_DIV !='' and C_DIV != null">
+		C_DIV=#{C_DIV},
+	     </if>
+	      <if test="EMP_NUM !='' and EMP_NUM != null">
+		EMP_NUM=#{EMP_NUM},
+	     </if>
+	      <if test="HOMEPAGE !='' and HOMEPAGE != null">
+		HOMEPAGE=#{HOMEPAGE},
+	     </if>
+	      <if test="C_NAME !='' and C_NAME != null">
+		C_NAME=#{C_NAME},
+	     </if>
+	    </set>
+		WHERE ID=#{ID}
+	</update>
+	
+	<update id="upDateMAG" parameterType="java.util.HashMap">
+		UPDATE UM_MEMBER
+		<set>
+		 <if test="U_NAME !='' and U_NAME != null">
+		U_NAME=#{U_NAME},
+	     </if>
+	      <if test="NAME !='' and NAME != null">
+		NAME=#{NAME},
+	     </if>
+	    </set>
+		WHERE ID=#{ID}
+	</update>
+	
+	
+	<insert id="log_Login">
+	<![CDATA[
+		INSERT INTO LOG_STATISTICS(LOG_NO, ID, LOGIN) VALUES(LOG_NO.nextval, #{param1}, SYSDATE)
+	]]>
+	</insert>
+	
+	<update id="log_Logout">
+	<![CDATA[
+		UPDATE LOG_STATISTICS SET LOGOUT=SYSDATE
+		WHERE LOG_NO = (SELECT MAX(LOG_NO) FROM LOG_STATISTICS WHERE ID = #{param1})
+	]]>
+	</update>
+	
+
+	<select id="id_check" resultType="String">
+	<![CDATA[
+	SELECT DECODE(COUNT(*), 0,'FALSE', 1,'TRUE') 
+	FROM MEMBER
+	WHERE ID = #{param1}
+	]]>
+	</select>
+	
+	<select id="email_check" resultType="String">
+	<![CDATA[
+	SELECT DECODE(COUNT(*), 0,'FALSE', 1,'TRUE') 
+	FROM MEMBER
+	WHERE EMAIL = #{param1}
+	]]>
+	</select>
+	
+	<select id="idFind" resultType="String">
+	<![CDATA[
+	SELECT RPAD(SUBSTR(ID,1,5),10,'*') ID FROM MEMBER
+	WHERE EMAIL = #{param1}
+	]]>
+	</select>
+
+
+	
+</mapper>
